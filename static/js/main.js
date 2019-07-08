@@ -1,39 +1,59 @@
-// function save_row(no)
-// {
-// 	var name_val=document.getElementById("name_text"+no).value;
-// 	var country_val=document.getElementById("country_text"+no).value;
-// 	var age_val=document.getElementById("age_text"+no).value;
+function colorize(e) {
+	for (i = 0; i < tbl_html.rows[0].cells.length; i++) {
+		for (j = 0; j < tbl_html.rows.length; j++ ) {
+			if (tbl_html.rows[j].cells[i].innerHTML == e) {
+				tbl_html.rows[j].cells[i].style.cssText = "background-color: yellow" 
+				return
+			}
+		}
+	}
+}
 
-// 	document.getElementById("name_row"+no).innerHTML=name_val;
-// 	document.getElementById("country_row"+no).innerHTML=country_val;
-// 	document.getElementById("age_row"+no).innerHTML=age_val;
+function findFactors() {
+	try {
+		saveRows()
+	} catch (e) {
+		
+	}
+	var table = []
+	tbl_html = document.getElementById('data_table');
+	for (i = 0; i < tbl_html.rows[0].cells.length; i++) {
+		table.push([])
+		for (j = 0; j < tbl_html.rows.length; j++ ) {
+			tbl_html.rows[j].cells[i].style.cssText = "background-color: white" 
+			table[i][j] = parseFloat(tbl_html.rows[j].cells[i].innerHTML)
+		}
+	}
 
-// 	document.getElementById("edit_button"+no).style.display="block";
-// 	document.getElementById("save_button"+no).style.display="none";
-// }
+	r = {}
+	r.Data = table
+	r.Result = parseFloat(document.getElementById('result').value)
 
-// function delete_row(no)
-// {
-// 	document.getElementById("row"+no+"").outerHTML="";
-// }
+	var xhr = new XMLHttpRequest();
 
-// function add_column()
-// {
-// 	var new_name=document.getElementById("new_name").value;
-// 	var new_country=document.getElementById("new_country").value;
-// 	var new_age=document.getElementById("new_age").value;
+	xhr.open('POST', '/api/getFactors', true);
+	xhr.send(JSON.stringify(r));
 
-// 	var table=document.getElementById("data_table");
-// 	var table_len=(table.rows.length)-1;
-// 	var row = table.insertRow(table_len).outerHTML="<tr id='row"+table_len+"'><td id='name_row"+table_len+"'>"+new_name+"</td><td id='country_row"+table_len+"'>"+new_country+"</td><td id='age_row"+table_len+"'>"+new_age+"</td><td><input type='button' id='edit_button"+table_len+"' value='Edit' class='edit' onclick='edit_row("+table_len+")'> <input type='button' id='save_button"+table_len+"' value='Save' class='save' onclick='save_row("+table_len+")'> <input type='button' value='Delete' class='delete' onclick='delete_row("+table_len+")'></td></tr>";
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState != 4) return;
 
-// 	document.getElementById("new_name").value="";
-// 	document.getElementById("new_country").value="";
-// 	document.getElementById("new_age").value="";
-// }
+		
+		button.innerHTML = 'Найти множители';
 
-
-
+		if (xhr.status != 200) {
+			alert(xhr.status + ': ' + xhr.statusText);
+		} else {
+			factors = document.getElementById('factors')
+			factors.innerHTML = "";
+			rJson = JSON.parse(xhr.responseText);
+			rJson.Result.forEach(function(e) {
+				colorize(e)
+				factors.innerHTML += e + " ";
+			});
+		}
+	}
+	button.innerHTML = 'Загружаю...';
+}
 
 function editRows() {
 	var tbl = document.getElementById('data_table');

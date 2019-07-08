@@ -4,29 +4,118 @@
         <title> Find factors
         </title>
     </header>
-    <script type="text/javascript" src="/js/table.js"></script>
-    <script type="text/javascript" src="/js/button.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
     <body>
         <div class="table" align='center' width="500px">
                 <table align='center' style="min-width: 600px" cellspacing=2 cellpadding=5 id="data_table" border=1>
                     <tr>
-                        <td>8.05</td>
-                        <td>22.78</td>
-                        <td>18.35</td>
-                        <td>22.78</td>
+                        <td>0.82</td>
+                        <td>1.14</td>
+                        <td>2.13</td>
+                        <td>3.46</td>
                     </tr>
                     <tr>
-                        <td>8.05</td>
-                        <td>8.05</td>
-                        <td>8.05</td>
-                        <td>22.78</td>
+                        <td>9.47</td>
+                        <td>3.02</td>
+                        <td>24.62</td>
+                        <td>2.70</td>
                     </tr>
                     <tr>
-                        <td>8.05</td>
-                        <td>8.05</td>
-                        <td>22.78</td>
-                        <td>22.78</td>
+                        <td>7.04</td>
+                        <td>8.13</td>
+                        <td>5.04</td>
+                        <td>10.07</td>
                     </tr>
+                    <tr>
+                        <td>2.58</td>
+                        <td>4.06</td>
+                        <td>7.13</td>
+                        <td>2.58</td>
+                    </tr>
+                    <tr>
+                        <td>1.78</td>
+                        <td>6.76</td>
+                        <td>1.04</td>
+                        <td>1.73</td>
+                    </tr>
+                    <tr>
+                        <td>2.14</td>
+                        <td>16.46</td>
+                        <td>12.13</td>
+                        <td>2.18</td>
+                    </tr>                    
+                    <tr>
+                        <td>3.18</td>
+                        <td>3.43</td>
+                        <td>0.97</td>
+                        <td>3.74</td>
+                    </tr>
+                    <tr>
+                        <td>2.52</td>
+                        <td>1.15</td>
+                        <td>6.43</td>
+                        <td>7.07</td>
+                    </tr>
+                    <tr>
+                        <td>4.38</td>
+                        <td>1.17</td>
+                        <td>3.33</td>
+                        <td>4.08</td>
+                    </tr>
+                    <tr>
+                        <td>1.06</td>
+                        <td>3.48</td>
+                        <td>7.93</td>
+                        <td>7.14</td>
+                    </tr>
+                    <tr>
+                        <td>14.82</td>
+                        <td>1.11</td>
+                        <td>2.07</td>
+                        <td>1.93</td>
+                    </tr>
+                    <tr>
+                        <td>2.23</td>
+                        <td>1.70</td>
+                        <td>2.04</td>
+                        <td>1.58</td>
+                    </tr>
+                    <tr>
+                        <td>1.78</td>
+                        <td>2.00</td>
+                        <td>3.16</td>
+                        <td>9.83</td>
+                    </tr>
+                    <tr>
+                        <td>1.43</td>
+                        <td>1.36</td>
+                        <td>1.50</td>
+                        <td>2.77</td>
+                    </tr>
+                    <tr>
+                        <td>1.11</td>
+                        <td>7.73</td>
+                        <td>2.01</td>
+                        <td>4.06</td>
+                    </tr>
+                    <tr>
+                        <td>1.24</td>
+                        <td>7.14</td>
+                        <td>7.14</td>
+                        <td>2.35</td>
+                    </tr>
+                    <tr>
+                        <td>4.28</td>
+                        <td>5.68</td>
+                        <td>6.46</td>
+                        <td>1.08</td>
+                    </tr>
+                    <tr>
+                        <td>2.09</td>
+                        <td>3.00</td>
+                        <td>3.03</td>
+                        <td>6.06</td>
+                    </tr>                    
                 </table>
                 <input type="button" id="edit" onclick="editRows();" value="Редактировать">
                 <input type="button" id="save" disabled=true onclick="saveRows();" value="Сохранить">
@@ -37,11 +126,13 @@
         </div>
         <div align="center">
             <p><b>Результат:</b><br>
-                <input type="text" size="40">
+                <input id='result' type="text" size="40">
             </p>
         </div>
         <div align=center>
             <button onclick="findFactors()" id="button">Найти множители</button>
+        </div>
+        <div align=center id="factors">
         </div>
     </body>
 </html>

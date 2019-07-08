@@ -1,21 +1,20 @@
 package main
 
 import (
-	"encoding/csv"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"math"
 	"net/http"
-	"os"
-	"strconv"
 )
 
-type Result struct {
+type findResponse struct {
 	Result []float64
 }
-type CSV struct {
-	Data [][]float64
+type findRequest struct {
+	Result float64
+	Data   [][]float64
 }
 
 func deepFindFactor(table [][]float64, n float64, x int, factors []float64, result float64) bool {
@@ -42,7 +41,6 @@ func deepFindFactor(table [][]float64, n float64, x int, factors []float64, resu
 }
 
 func findFactor(table [][]float64, result float64) []float64 {
-
 	factors := make([]float64, len(table))
 	for n := 0; n < len(table[0]); n++ {
 		factors[0] = table[0][n]
@@ -52,32 +50,20 @@ func findFactor(table [][]float64, result float64) []float64 {
 		}
 		if n >= len(table[0])-1 {
 			fmt.Println("Factors of given number has not been found")
-
+			empty := make([]float64, 0)
+			return empty
 		}
 	}
 	return factors
 }
 
 func getFactors(res http.ResponseWriter, req *http.Request) {
-	f, _ := os.Open("table.csv")
-	defer f.Close() // this needs to be after the err check
+	defer req.Body.Close()
+	body, _ := ioutil.ReadAll(req.Body)
 
-	lines, _ := csv.NewReader(f).ReadAll()
-
-	csv := make([][]float64, len(lines[0]))
-
-	for i := range csv[0] {
-		csv[i] = make([]float64, len(lines))
-	}
-
-	for _, line := range lines {
-		for j, element := range line {
-			floadElement, _ := strconv.ParseFloat(element, 64)
-			csv[j] = append(csv[j], floadElement)
-		}
-	}
-
-	p := &Result{Result: findFactor(csv, 43.53)}
+	fR := &findRequest{}
+	json.Unmarshal(body, fR)
+	p := &findResponse{Result: findFactor(fR.Data, fR.Result)}
 
 	js, err := json.Marshal(p)
 
