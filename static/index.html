@@ -1,0 +1,47 @@
+
+<html>
+    <header>
+        <title> Find factors
+        </title>
+    </header>
+    <script type="text/javascript" src="/js/table.js"></script>
+    <script type="text/javascript" src="/js/button.js"></script>
+    <body>
+        <div class="table" align='center' width="500px">
+                <table align='center' style="min-width: 600px" cellspacing=2 cellpadding=5 id="data_table" border=1>
+                    <tr>
+                        <td>8.05</td>
+                        <td>22.78</td>
+                        <td>18.35</td>
+                        <td>22.78</td>
+                    </tr>
+                    <tr>
+                        <td>8.05</td>
+                        <td>8.05</td>
+                        <td>8.05</td>
+                        <td>22.78</td>
+                    </tr>
+                    <tr>
+                        <td>8.05</td>
+                        <td>8.05</td>
+                        <td>22.78</td>
+                        <td>22.78</td>
+                    </tr>
+                </table>
+                <input type="button" id="edit" onclick="editRows();" value="Редактировать">
+                <input type="button" id="save" disabled=true onclick="saveRows();" value="Сохранить">
+                <input type="button" id="addRow" disabled=true onclick="appendRow();" value="Добавить строку">
+                <input type="button" id="addColumn" disabled=true onclick="appendColumn();" value="Добавить колонку">
+                <input type="button" id="deleteRows" disabled=true onclick="deleteRows();" value="Удалить строку">
+                <input type="button" id="deleteColumns" disabled=true onclick="deleteColumns();" value="Удалить колонку">
+        </div>
+        <div align="center">
+            <p><b>Результат:</b><br>
+                <input type="text" size="40">
+            </p>
+        </div>
+        <div align=center>
+            <button onclick="findFactors()" id="button">Найти множители</button>
+        </div>
+    </body>
+</html>
